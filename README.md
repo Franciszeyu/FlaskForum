@@ -23,5 +23,5 @@ if not conflict then update main branch  ```git push <reponame> <remote branch n
 
 delete local branch  ```git branch -d <nameN>```
 
-delete remote new branch  ```git push <reponame> --delete <nameN>
+delete remote new branch  ```git push <reponame> --delete <nameN>```
 
