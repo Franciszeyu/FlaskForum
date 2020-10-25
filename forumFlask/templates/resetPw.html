@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class = "content-section">
+        <!--action empty means post this to the same route-->
+        <form method="POST" action="">
+            <!--need this to validate the form, otherwise wont-->
+            {{ form.csrf_token }}
+            <fieldset class="form-group">
+                <!--The <legend> tag defines a caption for the <fieldset> element.-->
+                <!--The <fieldset> tag is used to group related elements in a form.-->
+                <legend class="border-bottom mb-4 pb-1">Now You Can Reset Password</legend>
+
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{error}}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.confirm.label(class="form-control-label") }}
+                    {% if form.confirm.errors %}
+                        {{ form.confirm(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm.errors %}
+                                <span>{{error}}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.confirm(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info btn-lg") }}
+            </div>
+        </form>
+    </div>
+
+{% endblock content%}

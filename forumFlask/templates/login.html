@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class = "content-section">
+        <!--action empty means post this to the same route-->
+        <form method="POST" action="">
+            <!--need this to validate the form, otherwise wont-->
+            {{ form.csrf_token }}
+            <fieldset class="form-group">
+                <!--The <legend> tag defines a caption for the <fieldset> element.-->
+                <!--The <fieldset> tag is used to group related elements in a form.-->
+                <legend class="border-bottom mb-4 pb-1">Sign In</legend>
+
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{error}}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{error}}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-check">
+                    {{ form.remember(class="form-check-input") }}
+                    {{ form.remember.label(class="form-check-label") }}
+                </div>
+            </fieldset>
+
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info btn-lg") }}
+                <small class="text-muted">
+                    <a class="ml-1" href="{{url_for('userBp.reset_req')}}">Forgot Password?</a>
+                </small>
+            </div>
+        </form>
+    </div>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Need an account? <a class="ml-1" href="{{url_for('userBp.register')}}">here</a>
+        </small>
+    </div>
+{% endblock content%}

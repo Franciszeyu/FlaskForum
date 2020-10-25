@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ img }}">
+            <div class="media-body">
+                <h2 class="">{{current_user.username}}</h2>
+                <p class="">{{current_user.email}}</p>
+            </div>
+        </div>
+
+        <a class="btn btn-outline-primary btn-lg btn-block mb-2 ml-2" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Update 
+          </a>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body content-section">
+            <form method="POST" action="" enctype="multipart/form-data">
+                <!--need this to validate the form, otherwise wont-->
+                {{ form.csrf_token }}
+                <fieldset class="form-group">
+                    <!--The <legend> tag defines a caption for the <fieldset> element.-->
+                    <!--The <fieldset> tag is used to group related elements in a form.-->
+                    <legend class="border-bottom mb-4 pb-1">Update Account Info</legend>
+    
+                    <div class="form-group">
+                        {{ form.username.label(class="form-control-label") }}
+    
+                        {% if form.username.errors %}
+                            {{ form.username(class="form-control form-control-lg is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.username(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.img.label() }}
+                        {{ form.img(class="form-control-file") }}
+
+                        {% if form.img.errors %}
+                            {% for error in form.img.errors %}
+                                <span class="text-danger">{{error}}</span><br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </fieldset>
+    
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info btn-lg") }}
+                </div>
+            </form>
+          </div>
+        </div>
+
+        <!--form-->
+            <!--action empty means post this to the same route-->
+            <!--enctype is needed for upload pic-->
+            
+    </div>
+{% endblock content%}

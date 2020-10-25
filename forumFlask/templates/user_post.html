@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h1 class="mb-4">  Posts by {{user.username}}  </h1>
+    {% for row in post.items %}
+        <article class="media content-section">
+                                                                                <!--author gives entire user obj-->
+            <img class="rounded-circle article-img" src="{{url_for('static', filename = 'pics/' + row.author.img_file)}}">
+            <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" >{{ row.author.username }}</a>
+                <small class="text-muted">{{ row.date.strftime('%Y-%m-%d') }}</small>
+            </div>
+            <h2><a class="article-title" href="{{url_for('postBp.post', post_id = row.id)}}">{{ row.title }}</a></h2>
+            <p class="article-content">{{ row.content }}</p>
+            </div>
+        </article>
+    {% endfor %}
+    <!-- display pages -->
+    {% for pageNum in post.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        <!-- 12 none 345678 none 91011  some at begin/end near the current-->
+        {% if pageNum %}
+            <!-- make the current page button filled -->
+            {% if post.page == pageNum %}
+                <a class="btn btn-info mb-5" href="{{ url_for('userBp.user_post', username=user.username, page=pageNum) }}">{{pageNum}}</a>
+            {% else %}
+                <a class="btn btn-outline-info mb-5" href="{{ url_for('userBp.user_post', username=user.username, page=pageNum) }}">{{pageNum}}</a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+{% endblock content%}
