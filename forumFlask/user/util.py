@@ -34,6 +34,7 @@ def sendEmail(user):
                   recipients=[user.email])
     msg.body = f'''Click link below:
                         {url_for('userBp.reset', token=token, _external=True)}
-                    If you didn't request this change, ignore this email and check your account.'''  #external to get absolute url
+                    If you didn't request this change, ignore this email and check your account.
+                    asdadadasdssd'''  #external to get absolute url
     
     mail.send(msg)
