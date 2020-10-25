@@ -33,6 +33,7 @@ def sendEmail(user):
                   sender=os.environ["USER_NAME"],
                   recipients=[user.email])
     msg.body = f'''Click link below:
-                        {url_for('userBp.reset', token=token, _external=True)}'''  #external to get absolute url
+                        {url_for('userBp.reset', token=token, _external=True)}
+                    If you didn't request this change, ignore this email and check your account.'''  #external to get absolute url
     
     mail.send(msg)
